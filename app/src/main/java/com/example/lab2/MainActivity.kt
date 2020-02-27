@@ -11,10 +11,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val myAdapter = MyPageAdapter(supportFragmentManager, this)
+        val list = intent.getStringArrayListExtra("json")
+
+        val listFrag = MyListFragment()
+        val bundle = Bundle()
+        bundle.putStringArrayList("json", list)
+        listFrag.arguments = bundle
+        supportFragmentManager.beginTransaction().replace(R.id.linearLayout, listFrag).commit()
+
+/*        val myAdapter = MyPageAdapter(supportFragmentManager, this)
 
         var viewPager : ViewPager = findViewById(R.id.viewPager)
-        viewPager.adapter = myAdapter
+        viewPager.adapter = myAdapter*/
     }
 
     override fun onBackPressed() {

@@ -36,10 +36,9 @@ class SplashActivity : AppCompatActivity() {
         thread.start()
         while (thread.isAlive) { }
 
-        Log.d("a", list.toString())
-        Log.d("b", list.size.toString())
-
+//        Log.d("a", list.toString())
         intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("json", list)
         startActivity(intent)
 
     }
