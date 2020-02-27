@@ -24,7 +24,7 @@ class MyListFragment : ListFragment() {
             array.add(value.name)
         }
 
-        val adapter : ListAdapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, array)
+        val adapter : ListAdapter = MyListAdapter(context, android.R.layout.simple_list_item_1, technolist)
 
         listAdapter = adapter
     }
@@ -50,7 +50,7 @@ class MyListFragment : ListFragment() {
 //                Log.d("abc", name)
             }
 
-            if ((image != "") and (name != "") and (helpText != "")) {
+            if ((image != "") and (name != "")) {
                 technolist.add(Technology(name, image, helpText))
                 image = ""
                 name = ""
