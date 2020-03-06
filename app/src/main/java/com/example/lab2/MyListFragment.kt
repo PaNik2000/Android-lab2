@@ -20,16 +20,20 @@ import java.util.concurrent.atomic.AtomicReferenceArray
 
 class MyListFragment : ListFragment() {
 
+    companion object {
+        val technolist : ArrayList<Technology> = ArrayList<Technology>()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val context = activity as Context
 
         val list : ArrayList<String>? = arguments?.getStringArrayList("json")
-        val technolist = ArrayList<Technology>()
 
-        toTechnology(list!!, technolist)
+        if (technolist.isEmpty())
+            toTechnology(list!!, technolist)
 
-        var adapter : ListAdapter = MyListAdapter(context, R.layout.list_element, technolist)
+        val adapter : ListAdapter = MyListAdapter(context, R.layout.list_element, technolist)
         listAdapter = adapter
 
     }
