@@ -1,14 +1,24 @@
 package com.example.lab2
 
+import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.media.Image
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ListAdapter
+import androidx.core.view.get
 import androidx.fragment.app.ListFragment
+import java.net.HttpURLConnection
+import java.net.URL
+import java.util.concurrent.atomic.AtomicReferenceArray
 
 class MyListFragment : ListFragment() {
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -16,18 +26,14 @@ class MyListFragment : ListFragment() {
 
         val list : ArrayList<String>? = arguments?.getStringArrayList("json")
         val technolist = ArrayList<Technology>()
+
         toTechnology(list!!, technolist)
 
-        val array = ArrayList<String>()
-
-        for (value in technolist) {
-            array.add(value.name)
-        }
-
-        val adapter : ListAdapter = MyListAdapter(context, android.R.layout.simple_list_item_1, technolist)
-
+        var adapter : ListAdapter = MyListAdapter(context, R.layout.list_element, technolist)
         listAdapter = adapter
+
     }
+
 
     fun toTechnology(list : ArrayList<String>, technolist : ArrayList<Technology>) {
         var image : String = ""
@@ -47,11 +53,13 @@ class MyListFragment : ListFragment() {
             }
             else if (Regex("\\s{8}\"name\".+").matches(list[i].substring(0, list[i].lastIndex))) {
                 name = list[i].substring(17, list[i].lastIndex - 2)
+                if (name == "?tech:Railroad")
+                    name = "Railroad"
 //                Log.d("abc", name)
             }
 
             if ((image != "") and (name != "")) {
-                technolist.add(Technology(name, image, helpText))
+                technolist.add(Technology(name, image, helpText, null))
                 image = ""
                 name = ""
                 helpText = ""

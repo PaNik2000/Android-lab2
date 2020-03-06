@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         var list = ArrayList<String>()
 
 
-        val thread = Thread() {
+        Thread() {
             val conn = URL("https://raw.githubusercontent.com/wesleywerner/" +
                     "ancient-tech/02decf875616dd9692b31658d92e64a20d99f816/src" +
                     "/data/techs.ruleset.json").openConnection()
@@ -31,15 +31,10 @@ class SplashActivity : AppCompatActivity() {
                 str = reader.readLine()
             }
             reader.close()
-        }
-
-        thread.start()
-        while (thread.isAlive) { }
-
-//        Log.d("a", list.toString())
-        intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("json", list)
-        startActivity(intent)
+            intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("json", list)
+            startActivity(intent)
+        }.start()
 
     }
 
