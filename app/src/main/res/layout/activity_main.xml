@@ -5,5 +5,11 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+
+<!--    <fragment-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/frag2"-->
+<!--        android:name="com.example.lab2.MyFragment"/>-->
 </LinearLayout>

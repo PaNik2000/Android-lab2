@@ -23,13 +23,13 @@ class MyPageAdapter internal constructor(fm: FragmentManager, context: Context) 
 
     override fun getItem(position: Int): Fragment {
         val arguments = Bundle()
-        arguments.putString(MyFragment.CAT_NAMES, mCatNames[position])
+        arguments.putString(MyFragmentElement.CAT_NAMES, mCatNames[position])
         arguments.putString(
-            MyFragment.CAT_DESCRIPTIONS,
+            MyFragmentElement.CAT_DESCRIPTIONS,
             mCatDescriptions[position]
         )
 
-        val catsFragment = MyFragment()
+        val catsFragment = MyFragmentElement()
         catsFragment.setArguments(arguments)
 
         return catsFragment

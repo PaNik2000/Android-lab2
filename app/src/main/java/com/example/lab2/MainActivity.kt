@@ -3,6 +3,9 @@ package com.example.lab2
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 
 class MainActivity : AppCompatActivity() {
@@ -19,10 +22,12 @@ class MainActivity : AppCompatActivity() {
         listFrag.arguments = bundle
         supportFragmentManager.beginTransaction().replace(R.id.linearLayout, listFrag).commit()
 
-/*        val myAdapter = MyPageAdapter(supportFragmentManager, this)
-
-        var viewPager : ViewPager = findViewById(R.id.viewPager)
-        viewPager.adapter = myAdapter*/
+//        val myAdapter = MyPageAdapter(supportFragmentManager, this)
+//
+//        val viewPager : ViewPager = findViewById(R.id.viewPager)
+//        viewPager.adapter = myAdapter
+//        val frag = MyFragment(viewPager)
+//        supportFragmentManager.beginTransaction().add(R.id.linearLayout, frag).commit()
     }
 
     override fun onBackPressed() {

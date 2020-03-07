@@ -8,12 +8,11 @@ import android.media.Image
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ListAdapter
+import android.view.View
+import android.widget.*
 import androidx.core.view.get
 import androidx.fragment.app.ListFragment
+import androidx.viewpager.widget.ViewPager
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.atomic.AtomicReferenceArray
@@ -35,9 +34,18 @@ class MyListFragment : ListFragment() {
 
         val adapter : ListAdapter = MyListAdapter(context, R.layout.list_element, technolist)
         listAdapter = adapter
-
     }
 
+    override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
+        super.onListItemClick(l, v, position, id)
+
+        val myAdapter = MyPageAdapter(requireActivity().supportFragmentManager, requireContext())
+        val viewPager = ViewPager(requireContext())
+        viewPager.adapter = myAdapter
+        val frag = MyFragmentElement()
+
+        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.linearLayout, frag).commit()
+    }
 
     fun toTechnology(list : ArrayList<String>, technolist : ArrayList<Technology>) {
         var image : String = ""
@@ -45,7 +53,6 @@ class MyListFragment : ListFragment() {
         var helpText : String = ""
 
         var i : Int = 0
-        var chars : CharSequence
         while (i < 718) {
             if (Regex("\\s{8}\"graphic\".+").matches(list[i].substring(0, list[i].lastIndex))) {
                 image = list[i].substring(20, list[i].lastIndex - 2)
