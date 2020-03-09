@@ -39,12 +39,10 @@ class MyListFragment : ListFragment() {
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
         super.onListItemClick(l, v, position, id)
 
-        val myAdapter = MyPageAdapter(requireActivity().supportFragmentManager, requireContext())
-        val viewPager = ViewPager(requireContext())
-        viewPager.adapter = myAdapter
-        val frag = MyFragmentElement()
+        val frag = MyFragment(technolist, position)
 
         requireActivity().supportFragmentManager.beginTransaction().replace(R.id.linearLayout, frag).commit()
+
     }
 
     fun toTechnology(list : ArrayList<String>, technolist : ArrayList<Technology>) {

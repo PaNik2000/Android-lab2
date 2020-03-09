@@ -7,39 +7,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-class MyPageAdapter internal constructor(fm: FragmentManager, context: Context) :
+class MyPageAdapter internal constructor(fm: FragmentManager, val objects: MutableList<Technology>) :
     FragmentPagerAdapter(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-
-    private val mCatNames: Array<String>
-    private val mCatDescriptions: Array<String>
-
-
-    init {
-
-        val resources = context.resources
-        mCatNames = resources.getStringArray(R.array.catsTitles)
-        mCatDescriptions = resources.getStringArray(R.array.catDescriptions)
-    }
 
     override fun getItem(position: Int): Fragment {
         val arguments = Bundle()
-        arguments.putString(MyFragmentElement.CAT_NAMES, mCatNames[position])
+        arguments.putString("name", objects[position].name)
         arguments.putString(
-            MyFragmentElement.CAT_DESCRIPTIONS,
-            mCatDescriptions[position]
+            "helpText",
+            objects[position].helpText
         )
+        arguments.putParcelable("bitmap", objects[position].bitmap)
 
-        val catsFragment = MyFragmentElement()
-        catsFragment.setArguments(arguments)
+        val myFragment = MyFragmentElement()
+        myFragment.setArguments(arguments)
 
-        return catsFragment
+        return myFragment
     }
 
     override fun getCount(): Int {
-        return mCatNames.size
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return mCatNames[position]
+        return objects.size
     }
 }
