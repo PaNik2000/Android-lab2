@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.ListAdapter
 import android.widget.TextView
 import androidx.core.view.get
+import java.net.HttpURLConnection
 import java.net.URL
 
 class MyListAdapter(context: Context, resource: Int, var objects: MutableList<Technology>) :
@@ -45,21 +46,13 @@ class MyListAdapter(context: Context, resource: Int, var objects: MutableList<Te
         return view
     }
 
-    inner class MyAsyncTask(val tech : Technology, val view : View) : AsyncTask<Void, Void, Void>() {
+    class MyAsyncTask(val tech : Technology, val view : View) : AsyncTask<Void, Void, Void>() {
 
         override fun doInBackground(vararg params: Void): Void? {
-            if ((tech.image != "chemistry.jpg")         and (tech.image != "economics.jpg")             and (tech.image != "electricity.jpg")
-                and (tech.image != "electronics.jpg")   and (tech.image != "espionage.jpg")             and (tech.image != "explosives.jpg")
-                and (tech.image != "fusion_power.jpg")  and (tech.image != "genetic_engineering.jpg")   and (tech.image != "guerilla_warfare.jpg")
-                and (tech.image != "iron_working.jpg")  and (tech.image != "literacy.jpg")              and (tech.image != "machine_tools.jpg")
-                and (tech.image != "magnetism.jpg")     and (tech.image != "masonry.jpg")               and (tech.image != "miniaturization.jpg")
-                and (tech.image != "plastics.jpg")      and (tech.image != "radio.jpg")                 and (tech.image != "railroad.jpg")
-                and (tech.image != "refrigeration.jpg") and (tech.image != "tactics.jpg")               and (tech.image != "the_wheel.jpg")) {
-                val conn = URL("https://raw.githubusercontent.com/wesleywerner/ancient-tech/" +
-                        "02decf875616dd9692b31658d92e64a20d99f816/src/images/tech/" + tech.image).openConnection()
+            val conn = URL("https://raw.githubusercontent.com/wesleywerner/ancient-tech/" +
+                    "02decf875616dd9692b31658d92e64a20d99f816/src/images/tech/" + tech.image).openConnection() as HttpURLConnection
 
-                conn.connect()
-
+            if (conn.responseCode == HttpURLConnection.HTTP_OK) {
                 val inputStream = conn.getInputStream()
                 tech.bitmap = BitmapFactory.decodeStream(inputStream)
             }

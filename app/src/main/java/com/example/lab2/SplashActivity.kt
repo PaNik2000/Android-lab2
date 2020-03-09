@@ -38,16 +38,17 @@ class SplashActivity : AppCompatActivity() {
                 intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("json", list)
                 startActivity(intent)
+                finish()
             }.start()
 
             ++numOfThreads;
         }
-
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-
-        finish()
+        else
+        {
+            intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("json", list)
+            startActivity(intent)
+            finish()
+        }
     }
 }

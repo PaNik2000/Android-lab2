@@ -29,13 +29,4 @@ class MainActivity : AppCompatActivity() {
 //        val frag = MyFragment(viewPager)
 //        supportFragmentManager.beginTransaction().add(R.id.linearLayout, frag).commit()
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-
-        val intent = Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_HOME)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)
-    }
 }
