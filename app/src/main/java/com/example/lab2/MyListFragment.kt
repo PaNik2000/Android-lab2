@@ -41,7 +41,7 @@ class MyListFragment : ListFragment() {
 
         val frag = MyFragment(technolist, position)
 
-        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.linearLayout, frag).commit()
+        requireActivity().supportFragmentManager.beginTransaction().addToBackStack("abc").replace(R.id.linearLayout, frag).commit()
 
     }
 
@@ -49,6 +49,7 @@ class MyListFragment : ListFragment() {
         var image : String = ""
         var name : String = ""
         var helpText : String = ""
+        var bitmap : Bitmap? = null
 
         var i : Int = 0
         while (i < 718) {
@@ -68,7 +69,8 @@ class MyListFragment : ListFragment() {
             }
 
             if ((image != "") and (name != "")) {
-                technolist.add(Technology(name, image, helpText, null))
+                bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(view?.resources, R.drawable.broken), 128, 128, true)
+                technolist.add(Technology(name, image, helpText, bitmap))
                 image = ""
                 name = ""
                 helpText = ""

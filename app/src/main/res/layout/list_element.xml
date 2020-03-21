@@ -8,13 +8,13 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listImage"
-        android:maxHeight="64dp"
-        android:maxWidth="64dp"/>
+        android:id="@+id/listImage" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listText"/>
+        android:id="@+id/listText"
+        android:textSize="18sp"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

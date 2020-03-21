@@ -31,16 +31,11 @@ class MyListAdapter(context: Context, resource: Int, var objects: MutableList<Te
         }
 
         (view?.findViewById(R.id.listText) as TextView).text = tech?.name
-        if (tech?.bitmap != null) {
-            val temp = tech.bitmap
-            (view.findViewById(R.id.listImage) as ImageView).setImageBitmap(Bitmap.createScaledBitmap(temp!!, 64, 64, true))
-        }
-        else {
-            MyAsyncTask(tech!!, view).execute()
-            if (tech.bitmap == null) {
-                tech.bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(view.resources, R.drawable.broken), 64, 64, true)
-                (view.findViewById(R.id.listImage) as ImageView).setImageBitmap(tech.bitmap)
-            }
+
+        val temp = tech?.bitmap
+        (view.findViewById(R.id.listImage) as ImageView).setImageBitmap(Bitmap.createScaledBitmap(temp!!, 128, 128, true))
+        if (tech.default) {
+            MyAsyncTask(tech, view).execute()
         }
 
         return view
@@ -61,7 +56,8 @@ class MyListAdapter(context: Context, resource: Int, var objects: MutableList<Te
 
         override fun onPostExecute(result: Void?) {
             super.onPostExecute(result)
-            (view.findViewById(R.id.listImage) as ImageView).setImageBitmap(Bitmap.createScaledBitmap(tech.bitmap!!, 64, 64, true))
+            tech.default = false
+            (view.findViewById(R.id.listImage) as ImageView).setImageBitmap(Bitmap.createScaledBitmap(tech.bitmap, 128, 128, true))
         }
     }
 

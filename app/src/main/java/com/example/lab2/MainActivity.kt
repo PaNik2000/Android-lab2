@@ -24,10 +24,4 @@ class MainActivity : AppCompatActivity() {
         listFrag.arguments = bundle
         supportFragmentManager.beginTransaction().replace(R.id.linearLayout, listFrag).commit()
     }
-
-    override fun onBackPressed() {
-        if (supportFragmentManager.primaryNavigationFragment != listFrag)
-            supportFragmentManager.beginTransaction().replace(R.id.linearLayout, listFrag).commit()
-        super.onBackPressed()
-    }
 }
